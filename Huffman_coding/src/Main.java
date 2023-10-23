@@ -1,7 +1,16 @@
 import decoding.HuffmanDecoder;
+import encoding.HuffmanEncoder;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        HuffmanDecoder.ex("C:\\Users\\karol\\GitHub\\BSiUI\\Huffman_coding\\src\\IO\\ex1.txt");
+        String fileName;
+        Scanner scanner = new Scanner(System.in);
+
+        fileName = scanner.nextLine();
+
+        HuffmanEncoder h = new HuffmanEncoder();
+        h.setFileName(fileName);
     }
 }
