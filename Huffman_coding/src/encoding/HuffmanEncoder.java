@@ -5,21 +5,48 @@ import java.util.*;
 import static IO.TxtReader.readFile;
 
 public class HuffmanEncoder {
-    private String stringToCode, sortedUniqueChar, fileName;
+    private String stringToCode, sortedUniqueChar, fileName, codedString, codedStringToCode = "", binaryModulo;
+    private int modulo;
+    private BitSet bitSets = new BitSet();
+    private Map<Character, String> letterToBinaryMap = new HashMap<>();
 
-    public System encodedCode;
+    public void encodeString() {
+        encodeDictionary();
 
-    //public List<String> encodedString = new ArrayList<>();
+        codedString = Integer.toString(sortedUniqueChar.length()) + sortedUniqueChar;
 
-    private void crateCode() {
-        
+        for (int i = 0; i < stringToCode.length() - 1; i++) {
+            codedStringToCode = codedStringToCode + letterToBinaryMap.get(stringToCode.charAt(i));
+        }
+
+        modulo = codedStringToCode.length() % 8;
+
+        if (modulo != 0){
+            modulo = 8 - modulo - 3;
+
+            binaryModulo = Integer.toBinaryString(modulo);
+
+            while (binaryModulo.length() < 3) {
+                binaryModulo = "0" + binaryModulo;
+            }
+
+            StringBuilder builder = new StringBuilder(binaryModulo);
+            builder.append(codedStringToCode);
+            codedStringToCode = builder.toString();
+
+            while (modulo != 0) {
+                codedStringToCode = codedStringToCode + "0";
+                modulo--;
+            }
+        }
+
+        System.out.println(codedStringToCode.length());
     }
 
     private void encodeDictionary(){
         fileRead("C:\\Users\\karol\\GitHub\\BSiUI\\Huffman_coding\\src\\IO\\" + fileName);
         sortUniqueCharacters(stringToCode);
 
-        Map<Character, String> letterToBinaryMap = new HashMap<>();
         String binary = "00";
 
         for (int i = 1; i <= sortedUniqueChar.length()-1; i++) {
@@ -30,11 +57,11 @@ public class HuffmanEncoder {
     }
 
     public static String incrementBinary(String binary) {
-        int value = Integer.parseInt(binary, 2); // Konwertuj na liczbę całkowitą
-        value++; // Inkrementuj
-        binary = Integer.toBinaryString(value); // Konwertuj z powrotem na wartość binarną
+        int value = Integer.parseInt(binary, 2);
+        value++;
+        binary = Integer.toBinaryString(value);
         while (binary.length() < 2) {
-            binary = "0" + binary; // Dodaj wiodące zera, jeśli to konieczne
+            binary = "0" + binary;
         }
         return binary;
     }

@@ -5,12 +5,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String fileName;
+
+        /*String fileName;
         Scanner scanner = new Scanner(System.in);
 
-        fileName = scanner.nextLine();
+        fileName = scanner.nextLine();*/
 
         HuffmanEncoder h = new HuffmanEncoder();
-        h.setFileName(fileName);
+        h.setFileName("ex1.txt");
+        h.encodeString();
+
     }
 }
