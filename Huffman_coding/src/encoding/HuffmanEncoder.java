@@ -1,5 +1,8 @@
 package encoding;
 
+import IO.TxtWriter;
+
+import java.sql.SQLOutput;
 import java.util.*;
 
 import static IO.TxtReader.readFile;
@@ -7,22 +10,24 @@ import static IO.TxtReader.readFile;
 public class HuffmanEncoder {
     private String stringToCode, sortedUniqueChar, fileName, codedString, codedStringToCode = "", binaryModulo;
     private int modulo;
-    private BitSet bitSets = new BitSet();
     private Map<Character, String> letterToBinaryMap = new HashMap<>();
 
     public void encodeString() {
         encodeDictionary();
 
-        codedString = Integer.toString(sortedUniqueChar.length()) + sortedUniqueChar;
+        codedString = String.valueOf(sortedUniqueChar.length());
+        codedString = codedString.concat(sortedUniqueChar);
+
 
         for (int i = 0; i < stringToCode.length() - 1; i++) {
             codedStringToCode = codedStringToCode + letterToBinaryMap.get(stringToCode.charAt(i));
         }
 
-        modulo = codedStringToCode.length() % 8;
+
+        modulo = (codedStringToCode.length() + 3) % 8;
 
         if (modulo != 0){
-            modulo = 8 - modulo - 3;
+            modulo = 8 - modulo;
 
             binaryModulo = Integer.toBinaryString(modulo);
 
@@ -40,16 +45,17 @@ public class HuffmanEncoder {
             }
         }
 
-        System.out.println(codedStringToCode.length());
+
+        TxtWriter.codeWriter(codedStringToCode, codedString);
     }
 
     private void encodeDictionary(){
-        fileRead("C:\\Users\\karol\\GitHub\\BSiUI\\Huffman_coding\\src\\IO\\" + fileName);
+        fileRead("C:\\Users\\karol\\GitHub\\BSiUI\\Huffman_coding\\src\\IO\\Examples\\" + fileName);
         sortUniqueCharacters(stringToCode);
 
         String binary = "00";
 
-        for (int i = 1; i <= sortedUniqueChar.length()-1; i++) {
+        for (int i = 0; i <= sortedUniqueChar.length()-1; i++) {
             char letter = sortedUniqueChar.charAt(i);
             letterToBinaryMap.put(letter, binary);
             binary = incrementBinary(binary);
@@ -69,7 +75,7 @@ public class HuffmanEncoder {
     private String sortUniqueCharacters(String stringToCode) {
         TreeSet<Character> characterSet = new TreeSet<>();
 
-        for (int i = 0; i < stringToCode.length(); i++) {
+        for (int i = 0; i < stringToCode.length() - 1; i++) {
             characterSet.add(stringToCode.charAt(i));
         }
 
