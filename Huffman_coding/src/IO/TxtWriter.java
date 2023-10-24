@@ -19,10 +19,10 @@ public class TxtWriter {
 
             codedString = codedString + character;
 
+            System.out.println(oneChar);
+
             oneChar = "";
         }
-
-
 
         try {
             FileWriter writer = new FileWriter("C:\\Users\\karol\\GitHub\\BSiUI\\Huffman_coding\\src\\IO\\Examples\\codedExample.txt");
