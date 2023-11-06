@@ -1,0 +1,1 @@
+Na dzisiejszych zajęciach udało mi się stworzyć podstawowe szyfrowanie AES. Wykorzystałem do tego standardowe biblioteki Java.
