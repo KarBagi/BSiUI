@@ -16,10 +16,9 @@ public class Window {
     JComboBox showConversation = new JComboBox();
     JTextField writeContact = new JTextField();
     JTable conversations = new JTable();
-
     String[] contacts = {"asd","asdasd","sdfsdf"};
 
-    public void Window() {
+    public Window() {
         JFrame frame = new JFrame("Messenger");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 330);
@@ -70,25 +69,6 @@ public class Window {
         frame.add(showContacts);
         frame.add(conversations);
         frame.add(writeContact);
-
-        // Tworzenie przycisku
-        /*JButton button = new JButton("Kliknij mnie");
-
-        // Dodanie obsługi zdarzenia dla przycisku
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Przycisk został kliknięty!");
-            }
-        });
-
-        // Dodanie przycisku do panelu
-        JPanel panel = new JPanel();
-        panel.add(button);*/
-
-        // Dodanie panelu do głównego okna
-
-        // Wyświetlenie głównego okna
 
         frame.add(mainPanel);
         frame.setVisible(true);
